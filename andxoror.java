@@ -1,3 +1,5 @@
+package HackerRankProblems;
+
 import java.util.*;
 
 
