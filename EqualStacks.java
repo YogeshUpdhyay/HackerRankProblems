@@ -5,8 +5,8 @@ import java.util.stream.IntStream;
 public class EqualStacks {
     static Stack<Integer> getStack(int[] arr) {
         Stack<Integer> stack = new Stack<>();
-        for(int i : arr) {
-            stack.add(i);
+        for(int i = arr.length-1;i >= 0;i--) {
+            stack.add(arr[i]);
         }
         return stack;
     }
@@ -14,11 +14,19 @@ public class EqualStacks {
         int sum1 = IntStream.of(h1).sum();
         int sum3 = IntStream.of(h3).sum();
         int sum2 = IntStream.of(h2).sum();
-        //Stack<Integer> stack1 = getStack(h1);
-        //Stack<Integer> stack2 = getStack(h2);
-        //Stack<Integer> stack3 = getStack(h3);
-        if(sum1 == sum2 && sum2 == sum3) {
-            return sum1;
+        Stack<Integer> stack1 = getStack(h1);
+        Stack<Integer> stack2 = getStack(h2);
+        Stack<Integer> stack3 = getStack(h3);
+        while(sum1 != sum2 || sum2 != sum3) {
+            if(sum1 > sum2 && sum1 > sum3){
+                sum1 -= stack1.pop();
+            }
+            else if(sum2 > sum3){
+                sum2 -= stack2.pop();
+            }
+            else{
+                sum3 -= stack3.pop();
+            }
         }
         return sum1;
     }
